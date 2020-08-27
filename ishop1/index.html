@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="style.css"/>
+    <script src="script.js"></script>
+</head>
+<body>
+    <script src="https://unpkg.com/react@15/dist/react.js"></script> 
+    <script src="https://unpkg.com/react-dom@15/dist/react-dom.js"></script> 
+    <script src="script.js"></script>
+
+<div id="container"></div>
+
+    <script>
+
+    var shopName = "Интернет магазин I`Shop";
+
+    var list = [
+            {name: 'НАИМЕНОВАНИЕ', price: "ЦЕНА", foto: "ФОТО", number: "КОЛИЧЕСТВО",code:1},
+            {name: 'Iphone5', price: 500, foto: 11, number: 5, code:2},
+            {name: 'Iphone7s', price: 550, foto: 22, number: 5, code:3},
+            {name: 'Iphone8', price: 800, foto: 33, number: 5, code:4},
+            {name: 'IphoneXS', price: 850, foto: 44, number: 5 ,code:5},
+            {name: 'Iphone11pro', price: 1110, foto: 55, number: 5, code:6},
+        ];
+
+      ReactDOM.render (
+         React.createElement(Ishop, {name: shopName, products: list}),
+         document.getElementById('container')
+        );
+
+</script>
+</body>
+</html>
