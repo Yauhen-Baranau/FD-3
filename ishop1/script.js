@@ -20,6 +20,7 @@ var Ishop = React.createClass({
                
 }
 
+
 return React.DOM.div( {className:null},
      React.DOM.h1 (null, this.props.name ),
      React.DOM.table( {className:"bb"},React.DOM.tbody (null,compliteArray)) 
