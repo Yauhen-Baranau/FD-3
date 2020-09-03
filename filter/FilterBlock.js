@@ -25,9 +25,9 @@ var FilterBlock = React.createClass ({
 
      isCheck: function(EO){
          if (EO.target.checked){
-             this.setState({check:'cheсked'})
+             this.setState({check: true})
              } else {
-            this.setState({check:''})
+            this.setState({check: false})
          }
      },  
         
@@ -44,7 +44,10 @@ var FilterBlock = React.createClass ({
 
     var filterCode = this.props.wordList.filter(v=> v.str.indexOf(this.state.text) !== -1)
 
-    // filterCode.sort(compareFIO)
+    if (this.state.check) {
+        filterCode.sort(compareFIO)
+    }
+
     var listCode = filterCode.map(v=> React.DOM.p({key: v.code} , v.str))
     
     
