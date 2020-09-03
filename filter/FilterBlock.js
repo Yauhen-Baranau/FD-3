@@ -8,7 +8,7 @@ var FilterBlock = React.createClass ({
 
  
     getInitialState: function() {
-        return { text:'', check:''};
+        return { text:'', check:false};
       },
 
 
@@ -17,7 +17,7 @@ var FilterBlock = React.createClass ({
        },
 
     restart: function(){
-        this.setState({text:'', check:''})
+        this.setState({text:'', check:false})
         
         },
 
