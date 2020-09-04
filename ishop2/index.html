@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ishop2</title>
+    <link href="ishopBlock.css" rel="stylesheet">
+</head>
+<body>
+    <script src="https://unpkg.com/react@15/dist/react.js"></script> 
+    <script src="https://unpkg.com/react-dom@15/dist/react-dom.js"></script> 
+    <script src="ishopBlock.js"></script>
+    <script src="product.js"></script>
+
+    <div id='container'></div>
+
+    <script>
+
+var shopName = 'Интернет Магазин I`SHOP'
+var list = [
+            {name: 'Iphone5', price: 500, url: 'http//', quanity: 2, code:2},
+            {name: 'Iphone7', price: 750, url: 'http//', quanity: 5, code:3},
+            {name: 'Iphone8', price: 800, url: 'http//', quanity: 20, code:4},
+            {name: 'IphoneXS', price: 1000, url: 'http//', quanity: 5, code:5},
+            {name: 'Iphone11Pro', price: 1500, url: 'http//', quanity:3, code:6},
+             ];
+
+
+ReactDOM.render (
+         React.createElement(IshopBlock, {products: list, name: shopName}),
+         document.getElementById('container')
+        );
+        
+    </script>
+    
+</body>
+</html>
