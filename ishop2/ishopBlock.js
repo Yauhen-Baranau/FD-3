@@ -9,13 +9,11 @@ var IshopBlock = React.createClass ({
         return {selected:null};
       },
     
-  ff: function (EO) {
+  pushSate: function (EO) {
     EO=EO||window.event;
     EO.preventDefault();
-    var i = EO.currentTarget;
-    i.style.cssText="background-color: red"
-     this.setState({selected:i})
-     },
+    this.setState({selected:EO.currentTarget})
+  },
 
      //    dell: function(){
 //     //  EO.stopPropagation()
@@ -27,9 +25,18 @@ var IshopBlock = React.createClass ({
 render: function(){
 
   //table
-    var nameStr = React.createElement(Product, {name:'NAME', price:'PRICE', url:'URL', quanity:'QUANITY', k:55 })    
+    var nameStr = React.createElement(Product, {name:'NAME',
+     price:'PRICE', url:'URL', quanity:'QUANITY', k:55 })    
+
     var str = this.props.products.map(v =>
-     React.createElement(Product, {name:v.name, price: v.price, url: v.url, quanity: v.quanity, codef:v.code, onClick: this.ff  })
+     React.createElement(Product, {
+      name:v.name,
+      price: v.price,
+      url: v.url, 
+      quanity: v.quanity, 
+      codef:v.code,
+      onClick: this.pushSate, 
+      isSelected: this.state.selected===v.code})
     );
 
            return React.DOM.div( null,
