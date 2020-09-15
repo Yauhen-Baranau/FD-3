@@ -6,13 +6,14 @@ var IshopBlock = React.createClass ({
     },
 
     getInitialState: function() {
-        return {selected:null};
+        return {selected: 0};
       },
     
   pushSate: function (EO) {
     EO=EO||window.event;
     EO.preventDefault();
     this.setState({selected:EO.currentTarget})
+    console.log(this.state.selected)
   },
 
      //    dell: function(){
@@ -30,14 +31,19 @@ render: function(){
 
     var str = this.props.products.map(v =>
      React.createElement(Product, {
+      
+      key:v.code,
+      code:v.code, 
       name:v.name,
       price: v.price,
       url: v.url, 
       quanity: v.quanity, 
-      codef:v.code,
       onClick: this.pushSate, 
-      isSelected: this.state.selected===v.code})
-    );
+      isSelected: (this.state.selected===v.code),
+      
+      } 
+      )
+      );
 
            return React.DOM.div( null,
             React.DOM.h1 (null, this.props.name),
