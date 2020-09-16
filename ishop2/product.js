@@ -8,12 +8,24 @@ var Product = React.createClass ({
  
       },
 
-      render: function() {
-        
+     call: function(EO){
+      EO=EO||window.event;
+      EO.preventDefault();
+      this.props.onClick(this.props.code)
+     },
 
-     return React.DOM.tr ( {
+      delete: function(EO){
+        EO=EO||window.event;
+        EO.preventDefault();
+        EO.stopPropagation()
+      this.props.cbDel(this.props.code)
+      },
+
+render: function() {
+        
+        return React.DOM.tr ( {
           key: this.props.code,
-          onClick: this.props.onClick, 
+          onClick: this.call, 
          'data-id': this.props.code,
           className: this.props.isSelected? "rr" : null, 
          },
@@ -22,7 +34,7 @@ var Product = React.createClass ({
               React.DOM.td( {className: 'tab'}, this.props.price),
               React.DOM.td( {className: 'tab'}, this.props.url),
               React.DOM.td( {className: 'tab'}, this.props.quanity),
-              React.DOM.td( {className: 'tab'}, React.DOM.button( {onClick:this.props.cbDel, "data-but-id":this.props.code}, 'DELETE'))
+              React.DOM.td( {className: 'tab'}, React.DOM.button( {onClick:this.delete, "data-but-id":this.props.code}, 'DELETE'))
             )
 }
 

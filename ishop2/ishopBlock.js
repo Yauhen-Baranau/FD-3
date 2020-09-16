@@ -9,25 +9,19 @@ var IshopBlock = React.createClass ({
         return {
           selected: 0,
           items : this.props.products,
+          
+          
         };
       },
 
-  pushSate: function (EO) {
-    EO=EO||window.event;
-    EO.preventDefault();
-   this.setState({selected:EO.currentTarget.getAttribute("data-id")})
+  pushSate: function (id) {
+  this.setState({selected:id})
   },
 
-del: function(EO){
-      EO=EO||window.event;
-      EO.preventDefault();
-      EO.stopPropagation()
-
-      if (EO.target.getAttribute('data-but-id')===this.state.selected){
-        var filt = this.state.items.filter( v=> v.code!=this.state.selected)
-        this.setState({items:filt})
-      }
-},
+del: function(id){
+        var filt = this.state.items.filter( v=> v.code!=id)
+        this.setState({items:filt} )
+      },
 
 
 
