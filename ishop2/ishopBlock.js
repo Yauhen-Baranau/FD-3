@@ -6,30 +6,42 @@ var IshopBlock = React.createClass ({
     },
 
     getInitialState: function() {
-        return {selected: 0};
+        return {
+          selected: 0,
+          items : this.props.products,
+        };
       },
-    
+
   pushSate: function (EO) {
     EO=EO||window.event;
     EO.preventDefault();
-    this.setState({selected:EO.currentTarget})
-    console.log(this.state.selected)
+   this.setState({selected:EO.currentTarget.getAttribute("data-id")})
   },
 
-     //    dell: function(){
-//     //  EO.stopPropagation()
-//     this.state.selected.parentNode.removeChild(this.state.selected)
-//     // this.setState({selected:null})
-//     // console.log(EO.currentTarget.parentNode.removeChild(EO.currentTarget))
-// },
-     
+del: function(EO){
+      EO=EO||window.event;
+      EO.preventDefault();
+      EO.stopPropagation()
+
+      if (EO.target.getAttribute('data-but-id')===this.state.selected){
+        var filt = this.state.items.filter( v=> v.code!=this.state.selected)
+        this.setState({items:filt})
+      }
+},
+
+
+
 render: function(){
+//table
+    var nameStr = React.DOM.tr ( null,
+      React.DOM.td(  {className: 'tab'}, "NAME" ),
+      React.DOM.td(  {className: 'tab'}, "PRICE" ),
+      React.DOM.td(  {className: 'tab'}, "URL" ),
+      React.DOM.td(  {className: 'tab'}, "QUANITY" ),
+      React.DOM.td(  {className: 'tab'}, "DELETE" ),
+      );    
 
-  //table
-    var nameStr = React.createElement(Product, {name:'NAME',
-     price:'PRICE', url:'URL', quanity:'QUANITY', k:55 })    
-
-    var str = this.props.products.map(v =>
+    var str = this.state.items.map(v =>
      React.createElement(Product, {
       
       key:v.code,
@@ -39,17 +51,16 @@ render: function(){
       url: v.url, 
       quanity: v.quanity, 
       onClick: this.pushSate, 
-      isSelected: (this.state.selected===v.code),
-      
-      } 
+      isSelected: (this.state.selected==v.code),
+      cbDel: this.del} 
       )
       );
-
-           return React.DOM.div( null,
+      
+      return React.DOM.div( null,
             React.DOM.h1 (null, this.props.name),
            React.DOM.table( null,React.DOM.tbody (null, nameStr, str)) 
        )
-  },
+},
 
 })
 
