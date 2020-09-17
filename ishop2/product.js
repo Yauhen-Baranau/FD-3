@@ -26,7 +26,6 @@ render: function() {
         return React.DOM.tr ( {
           key: this.props.code,
           onClick: this.call, 
-         'data-id': this.props.code,
           className: this.props.isSelected? "rr" : null, 
          },
       
