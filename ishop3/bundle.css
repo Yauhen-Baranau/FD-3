@@ -1,0 +1,11 @@
+.tab1 {
+    border: solid black 1px;
+    width: 100px;
+ }
+.tab {
+    border: solid black 1px;
+    }
+.selected {
+    background-color: red;
+}
+/*# sourceMappingURL=bundle.css.map*/
