@@ -11,12 +11,11 @@ render() {
 return(
        <div>
         { (this.props.elements!==null)?
-        
-        <div> 
+         <div> 
             <br/>
            <span>ID: {this.props.elements.code}</span> <br/>
            <span>Model: {this.props.elements.name}</span> <br/>
-           <span>price: {this.props.elements.price}</span> <br/>
+           <span>price:{this.props.elements.price}</span> <br/>
            <span>url: {this.props.elements.url}</span> <br/> 
            <span>quanity: {this.props.elements.quanity}</span> <br/>
         </div> : false }

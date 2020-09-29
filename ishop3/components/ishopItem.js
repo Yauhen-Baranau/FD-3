@@ -14,19 +14,23 @@ class Item extends React.Component {
         cbDelete: PropTypes.func,
         isSelected:PropTypes.bool,
         cbCheckMode: PropTypes.func,
+        mode: PropTypes.number.isRequired,
     }
 
-    itemClicked = (EO) => {
-      this.props.cbSelected(this.props.code);
-      this.props.cbCheckMode(0)
+    itemClicked = () => {
+      if (this.props.mode===0) {
+        this.props.cbSelected(this.props.code);
+        this.props.cbCheckMode(0)
       }
+    }
 
     delete = (EO) => {
         EO=EO||window.event;
         EO.preventDefault();
         EO.stopPropagation()
         this.props.cbDelete(this.props.code)
-    } 
+        
+       } 
     
     modeChekEdit1 = (EO) =>{
         EO=EO||window.event;
@@ -41,12 +45,12 @@ class Item extends React.Component {
             <tr className={this.props.isSelected? 'selected' : null}
                 key={this.props.code} code = {this.props.code}
                 onClick={this.itemClicked}>
-                    <th className="tab1">{this.props.name}</th>
-                    <th className="tab1">{this.props.price}</th>
-                    <th className="tab1">{this.props.url}</th>
-                    <th className="tab1">{this.props.quanity}</th>
-                    <th className="tab1"> <button onClick={this.modeChekEdit1}>EDIT</button></th>
-                    <th className="tab1"><button onClick={this.delete}>DELETE</button></th>
+                    <td className="tab1">{this.props.name}</td>
+                    <td className="tab1">{this.props.price}</td>
+                    <td className="tab1">{this.props.url}</td>
+                    <td className="tab1">{this.props.quanity}</td>
+                    <td className="tab1"> <button disabled={((this.props.mode!==0) && (this.props.mode!==1))} onClick={this.modeChekEdit1}>EDIT</button></td>
+                    <td className="tab1"><button disabled={(this.props.mode!==0)} onClick={this.delete}>DELETE</button></td>
             </tr>
         )
     }

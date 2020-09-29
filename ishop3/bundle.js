@@ -1008,8 +1008,8 @@ var _ishopBlock2 = _interopRequireDefault(_ishopBlock);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var itemsArr = __webpack_require__(38);
-var shopName = "Интернет магазин I`shop";
+var itemsArr = __webpack_require__(39);
+var shopName = "I`shop store";
 
 _reactDom2.default.render(_react2.default.createElement(_ishopBlock2.default, { brend: shopName, items: itemsArr, mode: 0 }), document.getElementById("container"));
 
@@ -21185,7 +21185,7 @@ module.exports = function() {
 
 
 Object.defineProperty(exports, "__esModule", {
-    value: true
+  value: true
 });
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -21221,126 +21221,183 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 var Ishop = function (_React$Component) {
-    _inherits(Ishop, _React$Component);
+  _inherits(Ishop, _React$Component);
 
-    function Ishop() {
-        var _ref;
+  function Ishop() {
+    var _ref;
 
-        var _temp, _this, _ret;
+    var _temp, _this, _ret;
 
-        _classCallCheck(this, Ishop);
+    _classCallCheck(this, Ishop);
 
-        for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
-            args[_key] = arguments[_key];
-        }
-
-        return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = Ishop.__proto__ || Object.getPrototypeOf(Ishop)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
-            itemsArr: _this.props.items,
-            selectedItemCode: 0,
-            forCardSelected: null,
-            mode: _this.props.mode
-
-        }, _this.itemSelect = function (code) {
-            // выбераем товар по id
-            console.log('выбран элемент с кодом ' + code);
-            _this.setState({ selectedItemCode: code });
-            _this.showCard(code);
-        }, _this.itemDelete = function (code) {
-            //фильтруем удаленный товар
-            var filt = _this.state.itemsArr.filter(function (v) {
-                return v.code != code;
-            });
-            _this.setState({ itemsArr: filt });
-            _this.setState({ forCardSelected: null });
-        }, _this.showCard = function (code) {
-            // фильтр для карточки товара
-            var filt = _this.state.itemsArr.filter(function (v) {
-                return v.code == code;
-            });
-            console.log(filt[0]);
-            _this.setState({ forCardSelected: filt[0] });
-        }, _this.checkMode = function (num) {
-            _this.setState({ mode: num });
-        }, _this.rename = function (elem) {
-            var newArray = JSON.parse(JSON.stringify(_this.state.itemsArr));
-            for (var i = 0; i < newArray.length; i++) {
-                if (newArray[i].code === _this.state.selectedItemCode) {
-                    newArray[i].name = elem.name;
-                    newArray[i].price = elem.price;
-                    newArray[i].url = elem.url;
-                    newArray[i].quanity = elem.quanity;
-                    newArray[i].code = elem.code;
-                    break;
-                }
-            }
-            console.log(elem);
-            _this.setState({ itemsArr: newArray });
-        }, _temp), _possibleConstructorReturn(_this, _ret);
+    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
     }
 
-    _createClass(Ishop, [{
-        key: 'render',
-        value: function render() {
-            var _this2 = this;
-
-            var products = this.state.itemsArr.map(function (v) {
-                return _react2.default.createElement(_ishopItem2.default, { name: v.name,
-                    price: v.price,
-                    url: v.url,
-                    quanity: v.quanity,
-                    key: v.code,
-                    isSelected: v.code == _this2.state.selectedItemCode,
-                    code: v.code,
-                    cbSelected: _this2.itemSelect,
-                    cbDelete: _this2.itemDelete,
-                    cbCheckMode: _this2.checkMode
-                });
-            });
-
-            return _react2.default.createElement(
-                'div',
-                null,
-                _react2.default.createElement(
-                    'h1',
-                    null,
-                    this.props.brend
-                ),
-                _react2.default.createElement(
-                    'table',
-                    { className: 'tab' },
-                    _react2.default.createElement(
-                        'tbody',
-                        null,
-                        products
-                    )
-                ),
-                this.state.forCardSelected !== null && this.state.mode === 0 ? _react2.default.createElement(
-                    'div',
-                    null,
-                    _react2.default.createElement(_product2.default, { elements: this.state.forCardSelected })
-                ) : null,
-                this.state.forCardSelected !== null && this.state.mode === 1 ? _react2.default.createElement(
-                    'div',
-                    null,
-                    _react2.default.createElement(_editBlock2.default, { elements: this.state.forCardSelected, rename: this.rename, cbCheckMode: this.checkMode })
-                ) : null
-            );
+    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = Ishop.__proto__ || Object.getPrototypeOf(Ishop)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
+      itemsArr: _this.props.items,
+      selectedItemCode: 0,
+      forCardSelected: null,
+      mode: _this.props.mode
+    }, _this.codeselect = function (code) {
+      _this.setState({ selectedItemCode: code });
+    }, _this.forCardTOselect = function (num) {
+      _this.setState({ forCardSelected: num });
+    }, _this.itemSelect = function (code) {
+      // выбераем товар по id
+      _this.setState({ selectedItemCode: code });
+      _this.showCard(code);
+    }, _this.itemDelete = function (code) {
+      //фильтруем удаленный товар
+      var filt = _this.state.itemsArr.filter(function (v) {
+        return v.code != code;
+      });
+      _this.setState({ itemsArr: filt });
+      _this.setState({ forCardSelected: null });
+      _this.setState({ mode: 0 });
+    }, _this.showCard = function (code) {
+      // фильтр для карточки товара
+      var filt = _this.state.itemsArr.filter(function (v) {
+        return v.code == code;
+      });
+      _this.setState({ forCardSelected: filt[0] });
+    }, _this.checkMode = function (num) {
+      _this.setState({ mode: num });
+    }, _this.checkModeforAdd = function () {
+      _this.setState({ mode: 2 });
+    }, _this.rename = function (elem) {
+      var newArray = JSON.parse(JSON.stringify(_this.state.itemsArr));
+      for (var i = 0; i < newArray.length; i++) {
+        if (newArray[i].code === _this.state.selectedItemCode) {
+          newArray[i].name = elem.name;
+          newArray[i].price = elem.price;
+          newArray[i].url = elem.url;
+          newArray[i].quanity = elem.quanity;
+          newArray[i].code = elem.code;
+          break;
         }
-    }]);
+      }
+      _this.setState({ itemsArr: newArray });
+    }, _this.generateID = function () {
+      var count = _this.state.itemsArr.length + 1;
+      _this.setState({ selectedItemCode: count });
+      _this.checkModeforAdd();
+    }, _this.addnp = function (elem) {
+      var newArray = JSON.parse(JSON.stringify(_this.state.itemsArr));
+      newArray.push(elem);
+      _this.setState({ itemsArr: newArray });
+      _this.setState({ selectedItemCode: 0 });
+    }, _temp), _possibleConstructorReturn(_this, _ret);
+  }
 
-    return Ishop;
+  _createClass(Ishop, [{
+    key: 'render',
+    value: function render() {
+      var _this2 = this;
+
+      var products = this.state.itemsArr.map(function (v) {
+        return _react2.default.createElement(_ishopItem2.default, { name: v.name,
+          price: v.price,
+          url: v.url,
+          quanity: v.quanity,
+          key: v.code,
+          isSelected: v.code == _this2.state.selectedItemCode,
+          code: v.code,
+          cbSelected: _this2.itemSelect,
+          cbDelete: _this2.itemDelete,
+          cbCheckMode: _this2.checkMode,
+          mode: _this2.state.mode
+        });
+      });
+
+      return _react2.default.createElement(
+        'div',
+        null,
+        _react2.default.createElement(
+          'h1',
+          null,
+          this.props.brend
+        ),
+        _react2.default.createElement(
+          'table',
+          { className: 'tab' },
+          _react2.default.createElement(
+            'tbody',
+            null,
+            _react2.default.createElement(
+              'tr',
+              null,
+              _react2.default.createElement(
+                'th',
+                { className: 't1' },
+                'Name'
+              ),
+              _react2.default.createElement(
+                'th',
+                { className: 't1' },
+                'Price'
+              ),
+              _react2.default.createElement(
+                'th',
+                { className: 't1' },
+                'URL'
+              ),
+              _react2.default.createElement(
+                'th',
+                { className: 't1' },
+                'Quanity'
+              ),
+              _react2.default.createElement(
+                'th',
+                { className: 't1' },
+                'Edit'
+              ),
+              _react2.default.createElement(
+                'th',
+                { className: 't1' },
+                'Delete'
+              )
+            ),
+            products
+          )
+        ),
+        _react2.default.createElement(
+          'button',
+          { disabled: this.state.mode === 2 || this.state.mode === 1, onClick: this.generateID },
+          'Add new product'
+        ),
+        this.state.forCardSelected !== null && this.state.mode === 0 ? _react2.default.createElement(
+          'div',
+          null,
+          _react2.default.createElement(_product2.default, { elements: this.state.forCardSelected })
+        ) : null,
+        this.state.mode === 1 && this.state.selectedItemCode !== 0 && _react2.default.createElement(
+          'div',
+          null,
+          _react2.default.createElement(_editBlock2.default, { key: this.state.forCardSelected.code, elements: this.state.forCardSelected, rename: this.rename, cbCheckMode: this.checkMode, mode: this.state.mode })
+        ),
+        this.state.mode === 2 && _react2.default.createElement(
+          'div',
+          null,
+          _react2.default.createElement(_editBlock2.default, { cbforCardTOselect: this.forCardTOselect, cbSelected: this.codeselect, elements: this.state.itemsArr, newCode: this.state.selectedItemCode, cbNew: this.addnp, cbCheckMode: this.checkMode, mode: this.state.mode })
+        )
+      );
+    }
+  }]);
+
+  return Ishop;
 }(_react2.default.Component);
 
 Ishop.PropTypes = {
-    mode: _propTypes2.default.number.isRequired,
-    brend: _propTypes2.default.string.isRequired,
-    items: _propTypes2.default.arrayOf(_propTypes2.default.shape({
-        name: _propTypes2.default.string.isRequired,
-        price: _propTypes2.default.number.isRequired,
-        url: _propTypes2.default.string.isRequired,
-        quanity: _propTypes2.default.number.isRequired,
-        code: _propTypes2.default.number.isRequired
-    }))
+  mode: _propTypes2.default.number.isRequired,
+  brend: _propTypes2.default.string.isRequired,
+  items: _propTypes2.default.arrayOf(_propTypes2.default.shape({
+    name: _propTypes2.default.string.isRequired,
+    price: _propTypes2.default.number.isRequired,
+    url: _propTypes2.default.string.isRequired,
+    quanity: _propTypes2.default.number.isRequired,
+    code: _propTypes2.default.number.isRequired
+  }))
 };
 exports.default = Ishop;
 
@@ -21395,9 +21452,11 @@ var Item = function (_React$Component) {
             args[_key] = arguments[_key];
         }
 
-        return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = Item.__proto__ || Object.getPrototypeOf(Item)).call.apply(_ref, [this].concat(args))), _this), _this.itemClicked = function (EO) {
-            _this.props.cbSelected(_this.props.code);
-            _this.props.cbCheckMode(0);
+        return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = Item.__proto__ || Object.getPrototypeOf(Item)).call.apply(_ref, [this].concat(args))), _this), _this.itemClicked = function () {
+            if (_this.props.mode === 0) {
+                _this.props.cbSelected(_this.props.code);
+                _this.props.cbCheckMode(0);
+            }
         }, _this.delete = function (EO) {
             EO = EO || window.event;
             EO.preventDefault();
@@ -21421,41 +21480,41 @@ var Item = function (_React$Component) {
                     key: this.props.code, code: this.props.code,
                     onClick: this.itemClicked },
                 _react2.default.createElement(
-                    'th',
+                    'td',
                     { className: 'tab1' },
                     this.props.name
                 ),
                 _react2.default.createElement(
-                    'th',
+                    'td',
                     { className: 'tab1' },
                     this.props.price
                 ),
                 _react2.default.createElement(
-                    'th',
+                    'td',
                     { className: 'tab1' },
                     this.props.url
                 ),
                 _react2.default.createElement(
-                    'th',
+                    'td',
                     { className: 'tab1' },
                     this.props.quanity
                 ),
                 _react2.default.createElement(
-                    'th',
+                    'td',
                     { className: 'tab1' },
                     ' ',
                     _react2.default.createElement(
                         'button',
-                        { onClick: this.modeChekEdit1 },
+                        { disabled: this.props.mode !== 0 && this.props.mode !== 1, onClick: this.modeChekEdit1 },
                         'EDIT'
                     )
                 ),
                 _react2.default.createElement(
-                    'th',
+                    'td',
                     { className: 'tab1' },
                     _react2.default.createElement(
                         'button',
-                        { onClick: this.delete },
+                        { disabled: this.props.mode !== 0, onClick: this.delete },
                         'DELETE'
                     )
                 )
@@ -21475,7 +21534,8 @@ Item.PropTypes = {
     cbSelected: _propTypes2.default.func.isRequired,
     cbDelete: _propTypes2.default.func,
     isSelected: _propTypes2.default.bool,
-    cbCheckMode: _propTypes2.default.func
+    cbCheckMode: _propTypes2.default.func,
+    mode: _propTypes2.default.number.isRequired
 };
 exports.default = Item;
 
@@ -21553,7 +21613,7 @@ var Product = function (_React$Component) {
                     _react2.default.createElement(
                         'span',
                         null,
-                        'price: ',
+                        'price:',
                         this.props.elements.price
                     ),
                     ' ',
@@ -21608,6 +21668,8 @@ var _propTypes = __webpack_require__(5);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
+__webpack_require__(38);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -21631,12 +21693,13 @@ var Edit = function (_React$Component) {
         }
 
         return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = Edit.__proto__ || Object.getPrototypeOf(Edit)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
-            name: _this.props.elements.name,
-            price: _this.props.elements.price,
-            url: _this.props.elements.url,
-            quanity: _this.props.elements.quanity,
-            code: _this.props.elements.code
+            name: _this.props.mode === 2 ? "" : _this.props.elements.name,
+            price: _this.props.mode === 2 ? "" : _this.props.elements.price,
+            url: _this.props.mode === 2 ? "" : _this.props.elements.url,
+            quanity: _this.props.mode === 2 ? "" : _this.props.elements.quanity,
+            code: _this.props.mode === 2 ? _this.props.newCode : _this.props.elements.code
         }, _this.changeV = function (EO) {
+            EO = EO || window.event;
             switch (EO.target.name) {
                 case '1':
                     _this.setState({ name: EO.target.value });
@@ -21651,73 +21714,213 @@ var Edit = function (_React$Component) {
                     _this.setState({ quanity: EO.target.value });
                     break;
             }
-            _this.setState({ code: _this.props.elements.code });
         }, _this.save = function () {
             _this.props.rename(_this.state);
+            _this.props.cbCheckMode(0);
+        }, _this.saveNewProduct = function (EO) {
+            EO = EO || window.event;
+            EO.preventDefault();
+            EO.stopPropagation();
+            _this.props.cbNew(_this.state);
             _this.props.cbCheckMode(0);
         }, _this.cancelCheckMode = function (EO) {
             EO = EO || window.event;
             EO.preventDefault();
             EO.stopPropagation();
             _this.props.cbCheckMode(0);
+            _this.props.cbSelected(0);
+            _this.props.cbforCardTOselect(null);
         }, _temp), _possibleConstructorReturn(_this, _ret);
     }
 
     _createClass(Edit, [{
         key: 'render',
         value: function render() {
+
+            var invalid = this.state.name !== "" && this.state.url !== "" && this.state.price !== "" && this.state.quanity !== "" ? false : true;
+
             return _react2.default.createElement(
                 'div',
                 null,
-                _react2.default.createElement(
-                    'h2',
+                this.props.mode == 1 && _react2.default.createElement(
+                    'div',
                     null,
-                    'Edit Existing product'
+                    _react2.default.createElement(
+                        'h2',
+                        null,
+                        'Edit Existing product'
+                    ),
+                    _react2.default.createElement(
+                        'span',
+                        null,
+                        'ID ',
+                        this.state.code
+                    ),
+                    _react2.default.createElement('br', null),
+                    _react2.default.createElement(
+                        'label',
+                        null,
+                        _react2.default.createElement(
+                            'span',
+                            { className: 'flo' },
+                            'Product name:'
+                        ),
+                        _react2.default.createElement('input', { type: 'text', name: 1, defaultValue: this.state.name, onChange: this.changeV })
+                    ),
+                    _react2.default.createElement(
+                        'span',
+                        { className: 'right' },
+                        this.state.name === "" ? " Please, fill the field!" : ''
+                    ),
+                    _react2.default.createElement('br', null),
+                    _react2.default.createElement(
+                        'label',
+                        null,
+                        _react2.default.createElement(
+                            'span',
+                            { className: 'flo' },
+                            'Price:'
+                        ),
+                        _react2.default.createElement('input', { type: 'text', name: 2, defaultValue: this.state.price, onChange: this.changeV })
+                    ),
+                    _react2.default.createElement(
+                        'span',
+                        { className: 'right' },
+                        this.state.price === "" ? " Please, fill the field!" : ''
+                    ),
+                    _react2.default.createElement('br', null),
+                    _react2.default.createElement(
+                        'label',
+                        null,
+                        _react2.default.createElement(
+                            'span',
+                            { className: 'flo' },
+                            'URL:'
+                        ),
+                        _react2.default.createElement('input', { type: 'text', name: 3, defaultValue: this.state.url, onChange: this.changeV })
+                    ),
+                    _react2.default.createElement(
+                        'span',
+                        { className: 'right' },
+                        this.state.url === "" ? " Please, fill the field!" : ''
+                    ),
+                    _react2.default.createElement('br', null),
+                    _react2.default.createElement(
+                        'label',
+                        null,
+                        _react2.default.createElement(
+                            'span',
+                            { className: 'flo' },
+                            'Quanity:'
+                        ),
+                        _react2.default.createElement('input', { type: 'text', name: 4, defaultValue: this.state.quanity, onChange: this.changeV })
+                    ),
+                    _react2.default.createElement(
+                        'span',
+                        { className: 'right' },
+                        this.state.quanity === "" ? " Please, fill the field!" : ''
+                    ),
+                    _react2.default.createElement('br', null),
+                    _react2.default.createElement(
+                        'button',
+                        { disabled: invalid, onClick: this.save },
+                        'SAVE'
+                    ),
+                    _react2.default.createElement(
+                        'button',
+                        { onClick: this.cancelCheckMode },
+                        'CANCEL'
+                    )
                 ),
-                _react2.default.createElement(
-                    'span',
+                this.props.mode == 2 && _react2.default.createElement(
+                    'div',
                     null,
-                    'ID ',
-                    this.props.elements.code
-                ),
-                _react2.default.createElement('br', null),
-                _react2.default.createElement(
-                    'label',
-                    null,
-                    'Product name:',
-                    _react2.default.createElement('input', { type: 'text', defaultValue: this.props.elements.name, name: 1, onChange: this.changeV })
-                ),
-                _react2.default.createElement('br', null),
-                _react2.default.createElement(
-                    'label',
-                    null,
-                    'Price:',
-                    _react2.default.createElement('input', { type: 'text', defaultValue: this.props.elements.price, name: 2, onChange: this.changeV })
-                ),
-                _react2.default.createElement('br', null),
-                _react2.default.createElement(
-                    'label',
-                    null,
-                    'URL:',
-                    _react2.default.createElement('input', { type: 'text', defaultValue: this.props.elements.url, name: 3, onChange: this.changeV })
-                ),
-                _react2.default.createElement('br', null),
-                _react2.default.createElement(
-                    'label',
-                    null,
-                    'Quanity:',
-                    _react2.default.createElement('input', { type: 'text', defaultValue: this.props.elements.quanity, name: 4, onChange: this.changeV })
-                ),
-                _react2.default.createElement('br', null),
-                _react2.default.createElement(
-                    'button',
-                    { onClick: this.save },
-                    'SAVE'
-                ),
-                _react2.default.createElement(
-                    'button',
-                    { onClick: this.cancelCheckMode },
-                    'CANCEL'
+                    _react2.default.createElement(
+                        'h2',
+                        null,
+                        'Add new Product'
+                    ),
+                    _react2.default.createElement(
+                        'span',
+                        null,
+                        'ID ',
+                        this.props.newCode
+                    ),
+                    _react2.default.createElement('br', null),
+                    _react2.default.createElement(
+                        'label',
+                        null,
+                        _react2.default.createElement(
+                            'span',
+                            { className: 'flo' },
+                            'Product name:'
+                        ),
+                        _react2.default.createElement('input', { type: 'text', name: 1, onChange: this.changeV })
+                    ),
+                    _react2.default.createElement(
+                        'span',
+                        { className: 'right' },
+                        this.state.name === "" ? " Please, fill the field!" : ''
+                    ),
+                    _react2.default.createElement('br', null),
+                    _react2.default.createElement(
+                        'label',
+                        null,
+                        _react2.default.createElement(
+                            'span',
+                            { className: 'flo' },
+                            'Price:'
+                        ),
+                        _react2.default.createElement('input', { type: 'text', name: 2, onChange: this.changeV })
+                    ),
+                    _react2.default.createElement(
+                        'span',
+                        { className: 'right' },
+                        this.state.price === "" ? " Please, fill the field!" : ''
+                    ),
+                    _react2.default.createElement('br', null),
+                    _react2.default.createElement(
+                        'label',
+                        null,
+                        _react2.default.createElement(
+                            'span',
+                            { className: 'flo' },
+                            'URL:'
+                        ),
+                        _react2.default.createElement('input', { type: 'text', name: 3, onChange: this.changeV })
+                    ),
+                    _react2.default.createElement(
+                        'span',
+                        { className: 'right' },
+                        this.state.url === "" ? " Please, fill the field!" : ''
+                    ),
+                    _react2.default.createElement('br', null),
+                    _react2.default.createElement(
+                        'label',
+                        null,
+                        _react2.default.createElement(
+                            'span',
+                            { className: 'flo' },
+                            'Quanity:'
+                        ),
+                        _react2.default.createElement('input', { type: 'text', name: 4, onChange: this.changeV })
+                    ),
+                    _react2.default.createElement(
+                        'span',
+                        { className: 'right' },
+                        this.state.quanity === "" ? " Please, fill the field!" : ''
+                    ),
+                    _react2.default.createElement('br', null),
+                    _react2.default.createElement(
+                        'button',
+                        { onClick: this.saveNewProduct, disabled: invalid },
+                        'ADD'
+                    ),
+                    _react2.default.createElement(
+                        'button',
+                        { onClick: this.cancelCheckMode },
+                        'CANCEL'
+                    )
                 )
             );
         }
@@ -21729,7 +21932,12 @@ var Edit = function (_React$Component) {
 Edit.PropTypes = {
     elements: _propTypes2.default.object.isRequired,
     rename: _propTypes2.default.func.isRequired,
-    cbCheckMode: _propTypes2.default.func.isRequired
+    cbCheckMode: _propTypes2.default.func.isRequired,
+    mode: _propTypes2.default.number.isRequired,
+    newCode: _propTypes2.default.number,
+    cbNew: _propTypes2.default.func,
+    cbSelected: _propTypes2.default.func,
+    cbforCardTOselect: _propTypes2.default.func
 };
 exports.default = Edit;
 
@@ -21737,7 +21945,13 @@ exports.default = Edit;
 /* 38 */
 /***/ (function(module, exports) {
 
-module.exports = [{"name":"Iphone5","price":500,"url":"URL:","quanity":20,"code":1},{"name":"Iphone6","price":600,"url":"URL:","quanity":40,"code":2},{"name":"Iphone7","price":789,"url":"URL:","quanity":33,"code":3},{"name":"IphoneXR","price":100,"url":"URL:","quanity":55,"code":4},{"name":"Iphone11pro","price":1256,"url":"URL:","quanity":34,"code":5}]
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 39 */
+/***/ (function(module, exports) {
+
+module.exports = [{"name":"Iphone 5","price":500,"url":"URL:","quanity":20,"code":1},{"name":"Iphone 6","price":600,"url":"URL:","quanity":40,"code":2},{"name":"Iphone 7","price":789,"url":"URL:","quanity":33,"code":3},{"name":"Iphone XS","price":100,"url":"URL:","quanity":55,"code":4},{"name":"Iphone 11","price":1256,"url":"URL:","quanity":34,"code":5}]
 
 /***/ })
 /******/ ]);

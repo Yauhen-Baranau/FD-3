@@ -26,11 +26,20 @@ class Ishop extends React.Component {
        selectedItemCode: 0,
        forCardSelected: null,
        mode: this.props.mode
+      };
 
-    };
-       itemSelect = (code) => { // выбераем товар по id
-        console.log('выбран элемент с кодом '+ code);
+
+     
+      codeselect = (code) => {
         this.setState({selectedItemCode:code})
+      }
+
+      forCardTOselect = (num) => {
+        this.setState({forCardSelected: num})
+      }
+
+       itemSelect = (code) => { // выбераем товар по id
+       this.setState({selectedItemCode:code})
         this.showCard(code)
         }
 
@@ -38,16 +47,20 @@ class Ishop extends React.Component {
         var filt = this.state.itemsArr.filter( v=> v.code!=code)
         this.setState({itemsArr:filt})
         this.setState({forCardSelected: null})
+        this.setState({mode: 0})
         }
 
         showCard = (code) => { // фильтр для карточки товара
         var filt = this.state.itemsArr.filter(v=> v.code==code)
-        console.log(filt[0])
         this.setState({forCardSelected:filt[0]})
-        }
+      }
 
         checkMode = (num) => {
             this.setState({mode:num})
+           }
+
+        checkModeforAdd = () => {
+            this.setState({mode:2})
         }
 
        rename = (elem) => {
@@ -62,13 +75,25 @@ class Ishop extends React.Component {
               break
           }
     }
-    console.log(elem)
-      this.setState({itemsArr:newArray})
+        this.setState({itemsArr:newArray})
        }
 
- render () {
+       generateID=()=>{
+         var count = this.state.itemsArr.length+1
+         this.setState({selectedItemCode:count})
+        this.checkModeforAdd()
+          }
+
+       addnp = (elem) => {
+        var newArray = JSON.parse(JSON.stringify(this.state.itemsArr));
+        newArray.push(elem)
+        this.setState({itemsArr: newArray})
+        this.setState({selectedItemCode:0})
+      }
        
-        var products=this.state.itemsArr.map( v =>
+
+ render () {
+      var products=this.state.itemsArr.map( v =>
         <Item name={v.name}
               price={v.price} 
               url={v.url}
@@ -79,17 +104,23 @@ class Ishop extends React.Component {
               cbSelected={this.itemSelect}
               cbDelete={this.itemDelete}
               cbCheckMode={this.checkMode}
+              mode = {this.state.mode}
         />
         );
   
        return(
+         
 
         <div>
             <h1>{this.props.brend}</h1>
-
+            
             <table className="tab">
-                <tbody>{products}</tbody>
+              <tbody>
+              <tr><th className="t1">Name</th><th className="t1">Price</th><th className="t1">URL</th><th className="t1">Quanity</th><th className="t1">Edit</th><th className="t1">Delete</th></tr>
+                {products}
+                </tbody>
             </table>
+            <button disabled={( (this.state.mode===2) || (this.state.mode===1))} onClick={this.generateID} >Add new product</button>
 
             { ( (this.state.forCardSelected!==null) && (this.state.mode===0) )?
             <div>
@@ -98,21 +129,23 @@ class Ishop extends React.Component {
             : null
             }
 
-            { ( (this.state.forCardSelected!==null) && (this.state.mode===1) )?
-              <div>
-               <Edit elements = {this.state.forCardSelected} rename={this.rename} cbCheckMode={this.checkMode} />
-              </div>
-               :
-               null
-            }
-            
-            
-        </div>  
-         )
-       
-    }
 
-}
+
+            {  ( (this.state.mode===1)&&(this.state.selectedItemCode!==0) )&& 
+              <div>
+               <Edit key={this.state.forCardSelected.code} elements = {this.state.forCardSelected} rename={this.rename} cbCheckMode={this.checkMode} mode={this.state.mode} />
+              </div>
+            }
+
+         {  (this.state.mode===2)&& 
+              <div>
+               <Edit cbforCardTOselect={this.forCardTOselect}  cbSelected={this.codeselect} elements = {this.state.itemsArr} newCode = {this.state.selectedItemCode} cbNew={this.addnp} cbCheckMode={this.checkMode} mode={this.state.mode}/>
+              </div>
+            }
+             </div>  
+         )
+    }
+  }
 
 export default Ishop
 
