@@ -30,6 +30,7 @@ class Item extends React.Component {
         EO.stopPropagation()
         this.props.cbDelete(this.props.code)
         
+        
        } 
     
     modeChekEdit1 = (EO) =>{

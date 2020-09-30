@@ -21279,8 +21279,10 @@ var Ishop = function (_React$Component) {
       }
       _this.setState({ itemsArr: newArray });
     }, _this.generateID = function () {
-      var count = _this.state.itemsArr.length + 2;
-      _this.setState({ selectedItemCode: count });
+      var count = _this.state.itemsArr.sort().map(function (v) {
+        return v.code;
+      });
+      _this.setState({ selectedItemCode: count[count.length - 1] + 1 });
       _this.checkModeforAdd();
     }, _this.addnp = function (elem) {
       var newArray = JSON.parse(JSON.stringify(_this.state.itemsArr));

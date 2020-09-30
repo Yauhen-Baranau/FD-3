@@ -79,8 +79,10 @@ class Ishop extends React.Component {
        }
 
        generateID=()=>{
-         var count = (this.state.itemsArr.length+2)
-         this.setState({selectedItemCode:count})
+        var count = this.state.itemsArr.sort().map( v =>
+                 v.code
+          )
+        this.setState({selectedItemCode:(count[count.length-1])+1})
         this.checkModeforAdd()
           }
 
