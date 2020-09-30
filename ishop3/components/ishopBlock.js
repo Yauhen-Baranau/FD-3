@@ -79,7 +79,7 @@ class Ishop extends React.Component {
        }
 
        generateID=()=>{
-         var count = this.state.itemsArr.length+1
+         var count = (this.state.itemsArr.length+2)
          this.setState({selectedItemCode:count})
         this.checkModeforAdd()
           }
@@ -133,7 +133,7 @@ class Ishop extends React.Component {
 
             {  ( (this.state.mode===1)&&(this.state.selectedItemCode!==0) )&& 
               <div>
-               <Edit key={this.state.forCardSelected.code} elements = {this.state.forCardSelected} rename={this.rename} cbCheckMode={this.checkMode} mode={this.state.mode} />
+               <Edit cbforCardTOselect={this.forCardTOselect} cbSelected={this.codeselect} key={this.state.forCardSelected.code} elements = {this.state.forCardSelected} rename={this.rename} cbCheckMode={this.checkMode} mode={this.state.mode} />
               </div>
             }
 

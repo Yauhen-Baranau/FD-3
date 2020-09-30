@@ -21279,7 +21279,7 @@ var Ishop = function (_React$Component) {
       }
       _this.setState({ itemsArr: newArray });
     }, _this.generateID = function () {
-      var count = _this.state.itemsArr.length + 1;
+      var count = _this.state.itemsArr.length + 2;
       _this.setState({ selectedItemCode: count });
       _this.checkModeforAdd();
     }, _this.addnp = function (elem) {
@@ -21374,7 +21374,7 @@ var Ishop = function (_React$Component) {
         this.state.mode === 1 && this.state.selectedItemCode !== 0 && _react2.default.createElement(
           'div',
           null,
-          _react2.default.createElement(_editBlock2.default, { key: this.state.forCardSelected.code, elements: this.state.forCardSelected, rename: this.rename, cbCheckMode: this.checkMode, mode: this.state.mode })
+          _react2.default.createElement(_editBlock2.default, { cbforCardTOselect: this.forCardTOselect, cbSelected: this.codeselect, key: this.state.forCardSelected.code, elements: this.state.forCardSelected, rename: this.rename, cbCheckMode: this.checkMode, mode: this.state.mode })
         ),
         this.state.mode === 2 && _react2.default.createElement(
           'div',
