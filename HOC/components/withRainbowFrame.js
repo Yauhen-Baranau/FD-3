@@ -30,7 +30,7 @@ function withRainbowFrame(color){
             color: null,
       }
       
-      componentWillMount = () => {
+      UNSAFE_componentWillMount = () => {
               let colorsArr = color;
               var colorFirst = colorsArr.shift()
               this.setState({color:colorFirst, colors: colorsArr})

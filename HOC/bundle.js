@@ -30728,7 +30728,7 @@ function withRainbowFrame(color) {
         return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = RainbowFrames.__proto__ || Object.getPrototypeOf(RainbowFrames)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
           colors: null,
           color: null
-        }, _this.componentWillMount = function () {
+        }, _this.UNSAFE_componentWillMount = function () {
           var colorsArr = color;
           var colorFirst = colorsArr.shift();
           _this.setState({ color: colorFirst, colors: colorsArr });
