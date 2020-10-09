@@ -18,21 +18,17 @@ class DoubleButton extends React.Component {
        f2 = (num) => {
         this.props.cbPressed(num)
        }
-    
-      componentDidMount = () => {
-        myEvents.addListener('buttonClick', this.f2 )
-      };
-    
-      componentWillUnmount = () => {
-        myEvents.removeListener('buttonClick', this.f2 )
-    }
+
        
        f1 = () => {
-        
-         myEvents.emit('buttonClick',1)
+         myEvents.addListener('buttonClick', this.f2 )
+         myEvents.emit('buttonClick', 1)
+         myEvents.removeListener('buttonClick', this.f2 )
         }
         f3 = () => {
+            myEvents.addListener('buttonClick', this.f2 )
             myEvents.emit('buttonClick',2)
+            myEvents.removeListener('buttonClick', this.f2 )
         }
 
     render() {
@@ -41,7 +37,7 @@ class DoubleButton extends React.Component {
             <div>
                 <input value={this.props.caption1} type={'button'} onClick={this.f1}></input>
                 <span>{this.props.children}</span>
-                <input type={'button'} value={this.props.caption2} onClick={this.f3}></input>
+                <input  type={'button'} value={this.props.caption2} onClick={this.f3}></input>
                 
             </div>
         )

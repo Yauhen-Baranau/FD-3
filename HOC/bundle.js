@@ -564,7 +564,9 @@ _reactDom2.default.render(_react2.default.createElement(
     _react2.default.createElement('br', null),
     _react2.default.createElement(
         FramedDoubleButton,
-        { caption1: '\u044F \u0438\u0437 \u043B\u0435\u0441\u0443', caption2: '\u043C\u043E\u0440\u043E\u0437' },
+        { caption1: '\u044F \u0438\u0437 \u043B\u0435\u0441\u0443', caption2: '\u043C\u043E\u0440\u043E\u0437', cbPressed: function cbPressed(num) {
+                return alert(num);
+            } },
         '\u0432\u044B\u0448\u0435\u043B, \u0431\u044B\u043B \u0441\u0438\u043B\u044C\u043D\u044B\u0439'
     )
 ), document.getElementById("container"));
@@ -29216,15 +29218,14 @@ var DoubleButton = function (_React$Component) {
 
         return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = DoubleButton.__proto__ || Object.getPrototypeOf(DoubleButton)).call.apply(_ref, [this].concat(args))), _this), _this.f2 = function (num) {
             _this.props.cbPressed(num);
-        }, _this.componentDidMount = function () {
-            _events.myEvents.addListener('buttonClick', _this.f2);
-        }, _this.componentWillUnmount = function () {
-            _events.myEvents.removeListener('buttonClick', _this.f2);
         }, _this.f1 = function () {
-
+            _events.myEvents.addListener('buttonClick', _this.f2);
             _events.myEvents.emit('buttonClick', 1);
+            _events.myEvents.removeListener('buttonClick', _this.f2);
         }, _this.f3 = function () {
+            _events.myEvents.addListener('buttonClick', _this.f2);
             _events.myEvents.emit('buttonClick', 2);
+            _events.myEvents.removeListener('buttonClick', _this.f2);
         }, _temp), _possibleConstructorReturn(_this, _ret);
     }
 
