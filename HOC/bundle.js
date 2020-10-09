@@ -560,11 +560,11 @@ _reactDom2.default.render(_react2.default.createElement(
             } },
         '\u0432 \u0441\u0442\u0443\u0434\u0451\u043D\u0443\u044E \u0437\u0438\u043C\u043D\u044E\u044E'
     ),
+    _react2.default.createElement('br', null),
+    _react2.default.createElement('br', null),
     _react2.default.createElement(
         FramedDoubleButton,
-        { caption1: '\u044F \u0438\u0437 \u043B\u0435\u0441\u0443', caption2: '\u043C\u043E\u0440\u043E\u0437', cbPressed: function cbPressed(num) {
-                return alert(num);
-            } },
+        { caption1: '\u044F \u0438\u0437 \u043B\u0435\u0441\u0443', caption2: '\u043C\u043E\u0440\u043E\u0437' },
         '\u0432\u044B\u0448\u0435\u043B, \u0431\u044B\u043B \u0441\u0438\u043B\u044C\u043D\u044B\u0439'
     )
 ), document.getElementById("container"));

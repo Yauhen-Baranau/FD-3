@@ -2,6 +2,7 @@ import React from 'react';
 
 
 
+
 // function withRainbowFrame(color){
   
 //     return function(Component) {
