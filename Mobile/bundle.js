@@ -29353,7 +29353,7 @@ var MobileCompany = function (_React$PureComponent) {
             console.log("MobileCompany render");
 
             var clients = this.state.clients.map(function (v) {
-                if (_this2.state.clientStatus === 'all' || _this2.state.clientStatus === 'blocked' && !v.active || _this2.state.clientStatus === 'active' && v.active) {
+                if (_this2.state.clientStatus === 'all' || _this2.state.clientStatus === 'blocked' && v.balance <= 0 || _this2.state.clientStatus === 'active' && v.balance > 0) {
                     return _react2.default.createElement(_MobileClient2.default, { key: v.id, client: v });
                 }
             });

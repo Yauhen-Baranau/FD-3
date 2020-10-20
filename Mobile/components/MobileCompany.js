@@ -137,7 +137,7 @@ render(){
 
 
         var clients = this.state.clients.map(v=>{
-            if ( (this.state.clientStatus==='all') || ((this.state.clientStatus==='blocked')&& (!v.active)) || ((this.state.clientStatus==='active')&&(v.active)) ) {
+            if ( (this.state.clientStatus==='all') || ((this.state.clientStatus==='blocked')&& (v.balance<=0)) || ((this.state.clientStatus==='active')&&(v.balance>0)) ) {
                return <MobileClient  key={v.id} client={v}/>
             }
                   
