@@ -19,6 +19,7 @@ class MobileCompany extends React.PureComponent {
         mode: this.props.mode,
         selectedClient: null,
         selectedCode: null,
+        newCode:null,
     }
 
     setClient = (id) => {
@@ -52,23 +53,23 @@ class MobileCompany extends React.PureComponent {
                 let newClient = {...v}
                
                    if ( v.i!=obj.i.value ) {
-                      newClient.i = obj.i.value
+                      newClient.i = obj.i
                       arr[i]=newClient
                       changed=true
                      }
                     
                     if( v.f !=obj.f.value ) {
-                        newClient.f = obj.f.value
+                        newClient.f = obj.f
                         arr[i]=newClient
                         changed=true
                     }
                     if ( v.o!=obj.o.value ) {
-                        newClient.o = obj.o.value
+                        newClient.o = obj.o
                         arr[i]=newClient
                         changed=true
                     }
                     if (v.balance!= obj.b.value ){
-                        newClient.balance = obj.b.value
+                        newClient.balance = obj.b
                         arr[i]=newClient
                         changed=true
                     }
@@ -81,7 +82,7 @@ class MobileCompany extends React.PureComponent {
 
     saveClient = (obj) => {
         var arr = [...this.state.clients]
-        var hash = {id:obj.key, f:obj.f.value, i:obj.i.value, o:obj.o.value, balance:obj.b.value, active:(obj.b.value>0)}
+        var hash = {id:obj.key, f:obj.f, i:obj.i, o:obj.o, balance:obj.b, active:(obj.b>0)}
         arr.push(hash)
         this.setState({clients:arr})
         this.setState({mode:1})
@@ -127,8 +128,15 @@ class MobileCompany extends React.PureComponent {
          }
 
          addmode = () => {
+            this.setState({mode:3})
+           
+                var count = this.props.clients.sort().map( v =>
+                    v.id
+                )
+
+               this.setState({newCode: (count[count.length-1])+1})
              
-this.setState({mode:3})
+              
     }
 
      
@@ -159,9 +167,10 @@ render(){
             </table>
             <hr/>
             <button onClick={this.addmode}>Добавить клиента</button>
+       
             {
-               (this.state.mode>1)&&
-               <Edit clients={this.state.clients} key={this.state.selectedCode} elem={this.state.selectedClient} mode={this.state.mode}/> 
+                    (this.state.mode>1)&&
+                    <Edit key={this.state.selectedCode} code={this.state.newCode}   mode={this.state.mode} elem={this.state.selectedClient} /> 
             }
              
             

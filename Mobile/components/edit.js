@@ -10,6 +10,7 @@ class Edit extends React.PureComponent {
       elem: PropTypes.object,
       mode: PropTypes.number.isRequired,
       clients: PropTypes.array,
+      code: PropTypes.number,
       
     }
 
@@ -32,10 +33,10 @@ class Edit extends React.PureComponent {
                      break;
                 case 'b':
                     this.objRef.b = ref
-                   break; 
                   
                       }
                     }
+                   
     }
        
 
@@ -44,20 +45,21 @@ class Edit extends React.PureComponent {
 
     ff = () => {
 
+      var oob = {f:this.objRef.f.value,i:this.objRef.i.value,o:this.objRef.o.value,b:this.objRef.b.value, key:null}
+
+      
       if (this.props.mode===2){
-        this.objRef.key=this.props.elem.id
-        myEvents.emit('edit', this.objRef)
+        oob.key=this.props.elem.id
+        myEvents.emit('edit', oob)
+      }
+
+      if (this.props.mode===3) {
+        oob.key=this.props.code
+        myEvents.emit('save', oob)
       }
       
-      if (this.props.mode===3) {
-        var count = this.props.clients.sort().map( v =>
-            v.id
-   )
-
-//    this.setState({selectedCode:(count[count.length-1])+1})
-        this.objRef.key=(count[count.length-1])+1
-        myEvents.emit('save', this.objRef)
-      }
+  
+      
       
 
     }

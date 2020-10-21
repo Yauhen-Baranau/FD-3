@@ -22,7 +22,7 @@ class MobileClient extends React.PureComponent {
   }
 
   render(){
-      console.log('Client is render')
+      console.log('Client is render id-'+ this.props.client.id )
     
      
       return(

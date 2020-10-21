@@ -29261,7 +29261,8 @@ var MobileCompany = function (_React$PureComponent) {
             clientStatus: 'all',
             mode: _this.props.mode,
             selectedClient: null,
-            selectedCode: null
+            selectedCode: null,
+            newCode: null
         }, _this.setClient = function (id) {
             _this.setState({ selectedCode: id });
             _this.setState({ mode: 2 });
@@ -29288,23 +29289,23 @@ var MobileCompany = function (_React$PureComponent) {
                     var newClient = _extends({}, v);
 
                     if (v.i != obj.i.value) {
-                        newClient.i = obj.i.value;
+                        newClient.i = obj.i;
                         arr[i] = newClient;
                         changed = true;
                     }
 
                     if (v.f != obj.f.value) {
-                        newClient.f = obj.f.value;
+                        newClient.f = obj.f;
                         arr[i] = newClient;
                         changed = true;
                     }
                     if (v.o != obj.o.value) {
-                        newClient.o = obj.o.value;
+                        newClient.o = obj.o;
                         arr[i] = newClient;
                         changed = true;
                     }
                     if (v.balance != obj.b.value) {
-                        newClient.balance = obj.b.value;
+                        newClient.balance = obj.b;
                         arr[i] = newClient;
                         changed = true;
                     }
@@ -29315,7 +29316,7 @@ var MobileCompany = function (_React$PureComponent) {
             });
         }, _this.saveClient = function (obj) {
             var arr = [].concat(_toConsumableArray(_this.state.clients));
-            var hash = { id: obj.key, f: obj.f.value, i: obj.i.value, o: obj.o.value, balance: obj.b.value, active: obj.b.value > 0 };
+            var hash = { id: obj.key, f: obj.f, i: obj.i, o: obj.o, balance: obj.b, active: obj.b > 0 };
             arr.push(hash);
             _this.setState({ clients: arr });
             _this.setState({ mode: 1 });
@@ -29340,8 +29341,13 @@ var MobileCompany = function (_React$PureComponent) {
         }, _this.showBlocked = function () {
             _this.setState({ clientStatus: 'blocked' });
         }, _this.addmode = function () {
-
             _this.setState({ mode: 3 });
+
+            var count = _this.props.clients.sort().map(function (v) {
+                return v.id;
+            });
+
+            _this.setState({ newCode: count[count.length - 1] + 1 });
         }, _temp), _possibleConstructorReturn(_this, _ret);
     }
 
@@ -29447,7 +29453,7 @@ var MobileCompany = function (_React$PureComponent) {
                     { onClick: this.addmode },
                     '\u0414\u043E\u0431\u0430\u0432\u0438\u0442\u044C \u043A\u043B\u0438\u0435\u043D\u0442\u0430'
                 ),
-                this.state.mode > 1 && _react2.default.createElement(_edit2.default, { clients: this.state.clients, key: this.state.selectedCode, elem: this.state.selectedClient, mode: this.state.mode })
+                this.state.mode > 1 && _react2.default.createElement(_edit2.default, { key: this.state.selectedCode, code: this.state.newCode, mode: this.state.mode, elem: this.state.selectedClient })
             );
         }
     }]);
@@ -30401,7 +30407,7 @@ var MobileClient = function (_React$PureComponent) {
   _createClass(MobileClient, [{
     key: 'render',
     value: function render() {
-      console.log('Client is render');
+      console.log('Client is render id-' + this.props.client.id);
 
       return _react2.default.createElement(
         'tr',
@@ -31014,25 +31020,21 @@ var Edit = function (_React$PureComponent) {
                         break;
                     case 'b':
                         _this.objRef.b = ref;
-                        break;
 
                 }
             }
         }, _this.ff = function () {
 
+            var oob = { f: _this.objRef.f.value, i: _this.objRef.i.value, o: _this.objRef.o.value, b: _this.objRef.b.value, key: null };
+
             if (_this.props.mode === 2) {
-                _this.objRef.key = _this.props.elem.id;
-                _events.myEvents.emit('edit', _this.objRef);
+                oob.key = _this.props.elem.id;
+                _events.myEvents.emit('edit', oob);
             }
 
             if (_this.props.mode === 3) {
-                var count = _this.props.clients.sort().map(function (v) {
-                    return v.id;
-                });
-
-                //    this.setState({selectedCode:(count[count.length-1])+1})
-                _this.objRef.key = count[count.length - 1] + 1;
-                _events.myEvents.emit('save', _this.objRef);
+                oob.key = _this.props.code;
+                _events.myEvents.emit('save', oob);
             }
         }, _temp), _possibleConstructorReturn(_this, _ret);
     }
@@ -31122,7 +31124,8 @@ var Edit = function (_React$PureComponent) {
 Edit.propTypes = {
     elem: _propTypes2.default.object,
     mode: _propTypes2.default.number.isRequired,
-    clients: _propTypes2.default.array
+    clients: _propTypes2.default.array,
+    code: _propTypes2.default.number
 
 };
 exports.default = Edit;
