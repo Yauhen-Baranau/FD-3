@@ -43,32 +43,31 @@ class MobileCompany extends React.PureComponent {
     }
 
     editClient = (obj) => {
-        // obj === {n: input, f: input, o: input, b: input, key: 5}
-        
-      this.setState({mode:1})
+    
+    this.setState({mode:1})
         var arr = [...this.state.clients]
         var changed = false;
         arr.forEach( (v,i) =>{
               if (v.id===obj.key){
                 let newClient = {...v}
                
-                   if ( v.i!=obj.i.value ) {
+                   if ( v.i!=obj.i ) {
                       newClient.i = obj.i
                       arr[i]=newClient
                       changed=true
                      }
                     
-                    if( v.f !=obj.f.value ) {
+                    if( v.f !=obj.f ) {
                         newClient.f = obj.f
                         arr[i]=newClient
                         changed=true
                     }
-                    if ( v.o!=obj.o.value ) {
+                    if ( v.o!=obj.o ) {
                         newClient.o = obj.o
                         arr[i]=newClient
                         changed=true
                     }
-                    if (v.balance!= obj.b.value ){
+                    if (v.balance!= obj.b ){
                         newClient.balance = obj.b
                         arr[i]=newClient
                         changed=true
@@ -81,9 +80,12 @@ class MobileCompany extends React.PureComponent {
     }
 
     saveClient = (obj) => {
-        var arr = [...this.state.clients]
-        var hash = {id:obj.key, f:obj.f, i:obj.i, o:obj.o, balance:obj.b, active:(obj.b>0)}
-        arr.push(hash)
+        let count = this.state.clients.sort().map( v =>
+            v.id
+        )
+        let arr = [...this.state.clients]
+        let hash = {id:(count[count.length-1])+1, f:obj.f, i:obj.i, o:obj.o, balance:obj.b, active:(obj.b>0)}
+        arr=[...arr,hash]
         this.setState({clients:arr})
         this.setState({mode:1})
     }
@@ -129,15 +131,7 @@ class MobileCompany extends React.PureComponent {
 
          addmode = () => {
             this.setState({mode:3})
-           
-                var count = this.props.clients.sort().map( v =>
-                    v.id
-                )
-
-               this.setState({newCode: (count[count.length-1])+1})
-             
-              
-    }
+        }
 
      
 render(){
@@ -170,7 +164,7 @@ render(){
        
             {
                     (this.state.mode>1)&&
-                    <Edit key={this.state.selectedCode} code={this.state.newCode}   mode={this.state.mode} elem={this.state.selectedClient} /> 
+                    <Edit key={this.state.selectedCode}  mode={this.state.mode} elem={this.state.selectedClient} /> 
             }
              
             

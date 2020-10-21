@@ -29279,7 +29279,6 @@ var MobileCompany = function (_React$PureComponent) {
             });
             _this.setState({ clients: arr });
         }, _this.editClient = function (obj) {
-            // obj === {n: input, f: input, o: input, b: input, key: 5}
 
             _this.setState({ mode: 1 });
             var arr = [].concat(_toConsumableArray(_this.state.clients));
@@ -29288,23 +29287,23 @@ var MobileCompany = function (_React$PureComponent) {
                 if (v.id === obj.key) {
                     var newClient = _extends({}, v);
 
-                    if (v.i != obj.i.value) {
+                    if (v.i != obj.i) {
                         newClient.i = obj.i;
                         arr[i] = newClient;
                         changed = true;
                     }
 
-                    if (v.f != obj.f.value) {
+                    if (v.f != obj.f) {
                         newClient.f = obj.f;
                         arr[i] = newClient;
                         changed = true;
                     }
-                    if (v.o != obj.o.value) {
+                    if (v.o != obj.o) {
                         newClient.o = obj.o;
                         arr[i] = newClient;
                         changed = true;
                     }
-                    if (v.balance != obj.b.value) {
+                    if (v.balance != obj.b) {
                         newClient.balance = obj.b;
                         arr[i] = newClient;
                         changed = true;
@@ -29315,9 +29314,12 @@ var MobileCompany = function (_React$PureComponent) {
                 }
             });
         }, _this.saveClient = function (obj) {
+            var count = _this.state.clients.sort().map(function (v) {
+                return v.id;
+            });
             var arr = [].concat(_toConsumableArray(_this.state.clients));
-            var hash = { id: obj.key, f: obj.f, i: obj.i, o: obj.o, balance: obj.b, active: obj.b > 0 };
-            arr.push(hash);
+            var hash = { id: count[count.length - 1] + 1, f: obj.f, i: obj.i, o: obj.o, balance: obj.b, active: obj.b > 0 };
+            arr = [].concat(_toConsumableArray(arr), [hash]);
             _this.setState({ clients: arr });
             _this.setState({ mode: 1 });
         }, _this.componentDidMount = function () {
@@ -29342,12 +29344,6 @@ var MobileCompany = function (_React$PureComponent) {
             _this.setState({ clientStatus: 'blocked' });
         }, _this.addmode = function () {
             _this.setState({ mode: 3 });
-
-            var count = _this.props.clients.sort().map(function (v) {
-                return v.id;
-            });
-
-            _this.setState({ newCode: count[count.length - 1] + 1 });
         }, _temp), _possibleConstructorReturn(_this, _ret);
     }
 
@@ -29453,7 +29449,7 @@ var MobileCompany = function (_React$PureComponent) {
                     { onClick: this.addmode },
                     '\u0414\u043E\u0431\u0430\u0432\u0438\u0442\u044C \u043A\u043B\u0438\u0435\u043D\u0442\u0430'
                 ),
-                this.state.mode > 1 && _react2.default.createElement(_edit2.default, { key: this.state.selectedCode, code: this.state.newCode, mode: this.state.mode, elem: this.state.selectedClient })
+                this.state.mode > 1 && _react2.default.createElement(_edit2.default, { key: this.state.selectedCode, mode: this.state.mode, elem: this.state.selectedClient })
             );
         }
     }]);
@@ -31033,7 +31029,7 @@ var Edit = function (_React$PureComponent) {
             }
 
             if (_this.props.mode === 3) {
-                oob.key = _this.props.code;
+
                 _events.myEvents.emit('save', oob);
             }
         }, _temp), _possibleConstructorReturn(_this, _ret);
@@ -31124,8 +31120,7 @@ var Edit = function (_React$PureComponent) {
 Edit.propTypes = {
     elem: _propTypes2.default.object,
     mode: _propTypes2.default.number.isRequired,
-    clients: _propTypes2.default.array,
-    code: _propTypes2.default.number
+    clients: _propTypes2.default.array
 
 };
 exports.default = Edit;
